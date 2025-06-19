@@ -25,12 +25,10 @@ const floatKeyframes = `
 
 function LandingPage() {
   useEffect(() => {
-    // Add keyframes to document
     const style = document.createElement('style');
     style.innerHTML = floatKeyframes;
     document.head.appendChild(style);
     
-    // Update title
     document.title = "AnimaGraph - Transform Text into Beautiful Mathematical Animations";
     
     return () => {

@@ -35,13 +35,13 @@ const Landing = ({ prompt, setPrompt, HandlePromptSubmit } : LandingProp) => {
                     </div>
                     <div>
                         <div className='flex gap-2 items-center justify-center text-gray-300 font-medium text-sm w-[700px]'>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700 rounded text-center'>Make a Rectangle Appear and Move   </div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Draw a Circle with a Rotating Dot </div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Spin a Polygon</div>
+                            <div onClick={() => setPrompt('Make a Rectangle Appear and Move')} className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700 rounded text-center'>Make a Rectangle Appear and Move   </div>
+                            <div onClick={() => setPrompt('Draw a Circle with a Rotating Dot')} className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Draw a Circle with a Rotating Dot </div>
+                            <div onClick={() => setPrompt('Spin a Polygon')} className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Spin a Polygon</div>
                         </div>
                         <div className='flex justify-center items-center text-gray-300 gap-2 font-medium text-sm w-[700px] pt-4'>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Create a Triangle That Bounces</div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Morph a Square into a Circle </div>
+                            <div onClick={() => setPrompt('Create a Triangle That Bounces')} className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Create a Triangle That Bounces</div>
+                            <div onClick={() => setPrompt('Morph a Square into a Circle')} className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Morph a Square into a Circle </div>
                         </div>
                         <div className='text-center pt-4 text-gray-300'>or start a blank animation with your imagination</div>
                     </div>
