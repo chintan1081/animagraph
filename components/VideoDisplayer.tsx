@@ -30,13 +30,13 @@ const VideoDisplayer = () => {
                 Error
               </div>
               <div className="p-4 mt-4 bg-red-500 text-white text-center">
-                There is error beacuse ai is not train on manim data.
+                AWS EC2 t3.micro is not able to handle your request the server is too small for the request.
               </div>
               <div className="p-4 mt-4 bg-red-500 text-white text-center">
-                Give a great prompt otherwise try something simple to generate
+                I am migrating to a different cloud provider working on it.
               </div>
               <div className="p-4 mt-4 bg-green-500 text-white text-center">
-                I will work on traning the ai if there are user for this app.
+                Try prompt Morph a Square into a Circle.
               </div>
               {/* {JSON.stringify(chatsData.videoGernerationError)} */}
             </div>

@@ -14,7 +14,7 @@ function  ClientWebSocket() {
 
     socketRef.current.onmessage = (event) => {
       setChatsData((prevChatsData : any) => ({...prevChatsData, llmThoughts : prevChatsData.llmThoughts + event.data}))
-      console.log('Message from server:', event.data);
+      // console.log('Message from server:', event.data);
     };
 
     socketRef.current.onclose = () => {
