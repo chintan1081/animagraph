@@ -1,5 +1,5 @@
-import { FaDiscord, FaLinkedin, FaRegCreditCard } from "react-icons/fa";
-import { FiArrowUp, FiChevronRight, FiLink, FiLogOut, FiSettings } from "react-icons/fi";
+import { FaRegCreditCard } from "react-icons/fa";
+import { FiChevronRight, FiLogOut, FiSettings } from "react-icons/fi";
 import PromptBox from "./PromptBox";
 import { ChatsContext } from "../context/ChatsContext";
 import { useContext } from "react";

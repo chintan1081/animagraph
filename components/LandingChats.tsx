@@ -3,11 +3,6 @@ import PromptBox from "./PromptBox"
 import { FaDiscord, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-type LandingProp = {
-    prompt : string;
-    setPrompt : Function;
-    HandlePromptSubmit : Function;
-}
 
 const LandingChats = () => {
     const navigate = useNavigate();

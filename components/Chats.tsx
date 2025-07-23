@@ -5,20 +5,20 @@ import axios from 'axios';
 import ChatsNavbar from './ChatsNavbar';
 import { HistorySide, ChatSide } from './Side';
 import VideoDisplayer from './VideoDisplayer';
-import Landing from './LandingChats';
 import LoadingScreen from './LoadingScreen';
 import ClientWebSocket from './ClientWebSocket';
 import { ChatsContext, ChatsProvider } from '../context/ChatsContext';
 
 const ChatsInner = () => {
-  const [isSideBar, setIsSideBar] = useState(true);
-  const [isSideHistory, setIsSideHistory] = useState(false);
+  const [isSideBar] = useState(true);
+  const [isSideHistory] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
-  const { chatsData, setChatsData }: any = useContext(ChatsContext); // Replace `any` with your type if defined
+  const { chatsData, setChatsData }: any = useContext(ChatsContext);
 
+  
   const gridCols = isSideBar
     ? isSideHistory
       ? 'grid-cols-[25%_1fr]'
