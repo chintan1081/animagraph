@@ -1,14 +1,22 @@
+import { useState } from "react";
 import PromptBox from "./PromptBox"
 import { FaDiscord, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-
+import { useNavigate } from "react-router-dom";
 type LandingProp = {
     prompt : string;
     setPrompt : Function;
     HandlePromptSubmit : Function;
 }
 
-const Landing = ({ prompt, setPrompt, HandlePromptSubmit } : LandingProp) => {
+const LandingChats = () => {
+    const navigate = useNavigate();
+    const [prompt, setPrompt] = useState("");
+
+    const HandlePromptSubmit = () => {
+        navigate("/chats", { state: { prompt, HandlePromptSubmit : true } });
+    }
+
     return (
         <div>
             <div className="bg-hero max-h-screen min-h-screen w-full">
@@ -35,13 +43,13 @@ const Landing = ({ prompt, setPrompt, HandlePromptSubmit } : LandingProp) => {
                     </div>
                     <div>
                         <div className='flex gap-2 items-center justify-center text-gray-300 font-medium text-sm w-[700px]'>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700 rounded text-center'>Make a Rectangle Appear and Move   </div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Draw a Circle with a Rotating Dot </div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Spin a Polygon</div>
+                            <div className='p-2  hover:bg-gray-700 border border-gray-700 rounded text-center'>Make a Rectangle Appear and Move   </div>
+                            <div className='p-2 hover:bg-gray-700 border border-gray-700  rounded text-center'>Draw a Circle with a Rotating Dot </div>
+                            <div className='p-2 hover:bg-gray-700 border border-gray-700  rounded text-center'>Spin a Polygon</div>
                         </div>
                         <div className='flex justify-center items-center text-gray-300 gap-2 font-medium text-sm w-[700px] pt-4'>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Create a Triangle That Bounces</div>
-                            <div className='p-2 cursor-pointer hover:bg-gray-700 border border-gray-700  rounded text-center'>Morph a Square into a Circle </div>
+                            <div className='p-2 hover:bg-gray-700 border border-gray-700  rounded text-center'>Create a Triangle That Bounces</div>
+                            <div className='p-2 hover:bg-gray-700 border border-gray-700  rounded text-center'>Morph a Square into a Circle </div>
                         </div>
                         <div className='text-center pt-4 text-gray-300'>or start a blank animation with your imagination</div>
                     </div>
@@ -51,4 +59,4 @@ const Landing = ({ prompt, setPrompt, HandlePromptSubmit } : LandingProp) => {
     )
 }
 
-export default Landing;
+export default LandingChats;

@@ -25,7 +25,7 @@ const VideoDisplayer = () => {
               Your browser does not support the video tag.
             </video>
             }
-            {chatsData.videoGernerationError !== '' && <div>
+            {/* {chatsData.videoGernerationError !== '' && <div>
               <div className="p-4 mt-4 bg-red-500 text-white text-center">
                 Error
               </div>
@@ -38,9 +38,8 @@ const VideoDisplayer = () => {
               <div className="p-4 mt-4 bg-green-500 text-white text-center">
                 I will work on traning the ai if there are user for this app.
               </div>
-              {/* {JSON.stringify(chatsData.videoGernerationError)} */}
             </div>
-            }
+            } */}
           </div>
         </div>
       </div>

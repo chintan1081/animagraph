@@ -1,95 +1,90 @@
+import { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+
 import ChatsNavbar from './ChatsNavbar';
 import { HistorySide, ChatSide } from './Side';
-import VideoDisplayer from './VideoDisplayer'
-import { useContext, useEffect, useState } from 'react';
-import Landing from './Landing';
-
-import axios from 'axios';
+import VideoDisplayer from './VideoDisplayer';
+import Landing from './LandingChats';
 import LoadingScreen from './LoadingScreen';
 import ClientWebSocket from './ClientWebSocket';
-import { ChatsContext } from '../context/ChatsContext';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { ChatsContext, ChatsProvider } from '../context/ChatsContext';
 
-const Chats = () => {
-
-
+const ChatsInner = () => {
   const [isSideBar, setIsSideBar] = useState(true);
   const [isSideHistory, setIsSideHistory] = useState(false);
-  const [isLanding, setIsLanding] = useState(true)
-  const location = useLocation();
-  const navigate = useNavigate()
+  const [prompt, setPrompt] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    console.log("..........................",location.pathname);
-    
-    if(location.pathname == '/chats'){
-      setIsLanding(false)
-    }
-  },[location.pathname])
+  const location = useLocation();
+  const { chatsData, setChatsData }: any = useContext(ChatsContext); // Replace `any` with your type if defined
 
   const gridCols = isSideBar
-    ? (isSideHistory ? 'grid-cols-[25%_1fr]' : 'grid-cols-[35%_1fr]')
+    ? isSideHistory
+      ? 'grid-cols-[25%_1fr]'
+      : 'grid-cols-[35%_1fr]'
     : 'grid-cols-1';
 
-  const [prompt, setPrompt] = useState("")
-  const [llmThoughts, setLlmThoughts] = useState("")
-  const [isloading, setIsLoading] = useState(false);
-  const { chatsData, setChatsData }: any = useContext(ChatsContext);
+  useEffect(() => {
+    const promptFromState = location.state?.prompt || "";
+    if (promptFromState) {
+      setPrompt(promptFromState);
+      handlePromptSubmit(promptFromState);
+    }
+  }, [location.state]);
 
-
-  const HandlePromptSubmit = async () => {
-    setIsLanding(false);
+  const handlePromptSubmit = async (currentPrompt: string) => {
     setIsLoading(true);
-    setChatsData({ ...chatsData, prompt, videoUrl: '', llmThoughts: '' })
-    setPrompt("")
-    if(location.pathname == '/chat') navigate('/chats')
+    setChatsData({ ...chatsData, prompt: currentPrompt, videoUrl: '', llmThoughts: '' });
+    setPrompt("");
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND}/animation`,
-        {
-          prompt: prompt,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer'
-          }
-        }
+        { prompt: currentPrompt },
+        { headers: { 'Content-Type': 'application/json' } }
       );
-      if (response.data.videoUrl) {
-        setChatsData((prevChatData: any) => ({ ...prevChatData, videoUrl: response.data.videoUrl }))
+
+      const { videoUrl, videoGernerationError } = response.data;
+
+      if (videoUrl) {
+        setChatsData((prev: any) => ({ ...prev, videoUrl }));
       }
-      if (response.data.videoGernerationError) {
-        setChatsData((prevChatData: any) => ({ ...prevChatData, videoGernerationError: response.data.videoGernerationError }))
+
+      if (videoGernerationError) {
+        setChatsData((prev: any) => ({ ...prev, videoGernerationError }));
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error generating video:', error);
     } finally {
       setIsLoading(false);
     }
-
-  }
+  };
 
   return (
     <div className="min-w-full">
       <ClientWebSocket />
-      {isLanding ? (<Landing prompt={prompt} setPrompt={setPrompt} HandlePromptSubmit={HandlePromptSubmit} />)
-        : (<>
-          <ChatsNavbar />
-          <div className={`grid ${gridCols} h-[calc(100vh-80px)]`}>
-            {
-              isSideBar ?
-                (isSideHistory ?
-                  <HistorySide />
-                  : <ChatSide prompt={prompt} setPrompt={setPrompt} HandlePromptSubmit={HandlePromptSubmit} />)
-                : <></>
-            }
-            {isloading ? <LoadingScreen /> : <VideoDisplayer />}
-          </div>
-        </>)
-      }
+      <ChatsNavbar />
+      <div className={`grid ${gridCols} h-[calc(100vh-80px)]`}>
+        {isSideBar && (
+          isSideHistory ? <HistorySide /> : (
+            <ChatSide
+              prompt={prompt}
+              setPrompt={setPrompt}
+              HandlePromptSubmit={() => handlePromptSubmit(prompt)}
+            />
+          )
+        )}
+        {isLoading ? <LoadingScreen /> : <VideoDisplayer />}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Chats;
+const ChatsPage = () => (
+  <ChatsProvider>
+    <ChatsInner />
+  </ChatsProvider>
+);
+
+export default ChatsPage;
