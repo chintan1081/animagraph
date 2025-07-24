@@ -9,20 +9,20 @@ function  ClientWebSocket() {
     socketRef.current = new WebSocket(import.meta.env.VITE_SOCKET_URL || 'ws://localhost:5000');
 
     socketRef.current.onopen = () => {
-      console.log('WebSocket connected');
+      // console.log('WebSocket connected');
     };
 
     socketRef.current.onmessage = (event) => {
       setChatsData((prevChatsData : any) => ({...prevChatsData, llmThoughts : prevChatsData.llmThoughts + event.data}))
-      console.log('Message from server:', event.data);
+      // console.log('Message from server:', event.data);
     };
 
     socketRef.current.onclose = () => {
-      console.log('WebSocket closed');
+      // console.log('WebSocket closed');
     };
 
     socketRef.current.onerror = (error) => {
-      console.error('WebSocket error:', error);
+      // console.error('WebSocket error:', error);
     };
 
     return () => {

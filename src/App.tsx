@@ -8,10 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route path='/' element={<LandingPage />} />
-         
-          <Route path="/chat" element={<LandingChats />} />
-           <Route path="/chats" element={<Chats />} />
+        <Route path='/' element={<LandingPage />} />
+        <Route path="/chat" element={<LandingChats />} />
+        <Route path="/chats" element={<Chats />} />
       </Routes>
     </BrowserRouter>
   )
