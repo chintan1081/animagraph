@@ -21,7 +21,7 @@ function  ClientWebSocket() {
       // console.log('WebSocket closed');
     };
 
-    socketRef.current.onerror = (error) => {
+    socketRef.current.onerror = () => {
       // console.error('WebSocket error:', error);
     };
 
