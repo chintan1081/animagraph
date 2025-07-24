@@ -115,7 +115,7 @@ const ChatSide = ({ prompt, setPrompt, HandlePromptSubmit } : ChatSideProp) => {
     }
   }, [history, chatsData]);
 
-  const renderPromptBlock = (prompt : any, thoughts : any, index : number) => (
+  const renderPromptBlock = (prompt : any, thoughts : any, index : any) => (
     <div key={index} className="w-[calc(100%-20px)] mt-6 rounded-lg">
       <div className="pl-4 pt-4 bg-[#2a2929] text-gray-400 font-semibold flex gap-2 items-center">
         Prompt <FiChevronRight />
