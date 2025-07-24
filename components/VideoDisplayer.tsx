@@ -21,25 +21,28 @@ const VideoDisplayer = () => {
           </div>
           <div className="w-full aspect-video rounded-xl overflow-hidden border border-gray-600 shadow-lg">
             {chatsData.videoUrl !== '' && <video className="w-full h-full" controls autoPlay>
-              <source src={`${chatsData.videoUrl}?cacheBust=${Date.now()}`} type="video/mp4" />
+              <source
+                // src={`${chatsData.videoUrl}?cacheBust=${Date.now()}`} 
+                src={`data:video/mp4;base64,${chatsData.videoUrl}`}
+                type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             }
-            {/* {chatsData.videoGernerationError !== '' && <div>
+            {chatsData.videoGernerationError && <div>
               <div className="p-4 mt-4 bg-red-500 text-white text-center">
-                Error
+                Give a great prompt otherwise try something simple to generate
+              </div>
+              <div className="p-4 mt-4 bg-red-500 text-white text-center">
+                {JSON.stringify(chatsData.videoGernerationError)}
               </div>
               <div className="p-4 mt-4 bg-red-500 text-white text-center">
                 There is error beacuse ai is not train on manim data.
-              </div>
-              <div className="p-4 mt-4 bg-red-500 text-white text-center">
-                Give a great prompt otherwise try something simple to generate
               </div>
               <div className="p-4 mt-4 bg-green-500 text-white text-center">
                 I will work on traning the ai if there are user for this app.
               </div>
             </div>
-            } */}
+            }
           </div>
         </div>
       </div>
@@ -49,3 +52,4 @@ const VideoDisplayer = () => {
 }
 
 export default VideoDisplayer
+
